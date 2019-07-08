@@ -37,6 +37,7 @@ var questions =[
     $("#answer2").empty();
     $("#answer3").empty();
     $("#answer4").empty();
+    
    
     if (questionIndex <= (questions.length - 1)) {
         $("#question").append("<p>" + questions[questionIndex].q + "</p>");
@@ -46,24 +47,28 @@ var questions =[
         $("#answer2").append("<p>" + questions[questionIndex].b + "</p>");
         $("#answer3").append("<p>" + questions[questionIndex].c + "</p>");
         $("#answer4").append("<p>" + questions[questionIndex].d + "</p>");
-      
+       
+        
       }
       // If there aren't, render the end game screen.
       else {
-        return;
+        $("#question").text("Game Over!");
+        $("#correctanswers").text ("correctanswers :" + correctAnswers);
+        $("#wronganswers").text ("wronganswers :" + wrongAnswers);
+        $("#validation").empty();
       }
        };
       
        renderQuestions();
        
-       
+       function first(){
        $("#answer1").on("click", function() {
 
         
          if(questionIndex === 0 || questionIndex === 5){
         $("#validation").text("correct");
          correctAnswers++;
-         $("#score").text("correct : " + correctAnswers);
+         
          
       }
 
@@ -72,58 +77,61 @@ var questions =[
           $("#validation").text("incorrect");
          wrongAnswers++;
 
-         $("#score").text("wrong : " + wrongAnswers);
+        
         }
-       
+      
         questionIndex++;
         renderQuestions();
       });
-     
+       }
+  function second(){
       $("#answer2").on("click", function() {
 
         if(questionIndex === 1 || questionIndex === 4){
           $("#validation").text("correct");
           correctAnswers++;
-          $("#score").text("correct : " + correctAnswers);
+        
         }
 
        else{
 
         $("#validation").text("incorrect");
         wrongAnswers++;
-        $("#score").text("wrong : " + wrongAnswers);
+      
        }
        questionIndex++;
        renderQuestions();
 
      });
-
+    }
+    function third(){
      $("#answer3").on("click", function() {
 
       if(questionIndex === 3){
         $("#validation").text("correct");
         correctAnswers++;
 
-        $("#score").text("correct : " + correctAnswers);
+        
       }
 
      else{
 
       $("#validation").text("incorrect");
       wrongAnswers++;
-      $("#score").text("wrong : " + wrongAnswers);
+      
      }
      questionIndex++;
      renderQuestions();
 
    });
-
+  }
+  function four(){
    $("#answer4").on("click", function() {
 
     if(questionIndex === 2){
       $("#validation").text("correct");
       correctAnswers++;
-      $("#score").text("correct : " + correctAnswers);
+      
     
     }
 
@@ -131,13 +139,23 @@ var questions =[
 
     $("#validation").text("incorrect");
     wrongAnswers++;
-    $("#score").text("wrong : " + wrongAnswers);
+    
    }
    questionIndex++;
    renderQuestions();
 
- });
+ });}
 
+ function submit(){
+
+    first();
+    second();
+    third();
+    four();
+    
+ }
+
+ submit();
  
  
 
