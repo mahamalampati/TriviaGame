@@ -26,8 +26,24 @@ var questions =[
 
    var questionIndex=0;
    
-  
+   function gamePlay()
+   {
+
+    $("#question").empty();
+    $("#answer1").empty();
+    $("#answer2").empty();
+    $("#answer3").empty();
+    $("#answer4").empty();
+      
+       $(".startBtn").on("click",function()
+       {
+        $("button").remove(".startBtn");
+        
+       renderQuestions();
+        
+       });
    
+      }
    
    
    function renderQuestions()
@@ -48,7 +64,7 @@ var questions =[
         $("#answer3").append("<p>" + questions[questionIndex].c + "</p>");
         $("#answer4").append("<p>" + questions[questionIndex].d + "</p>");
        
-        
+
       }
       // If there aren't, render the end game screen.
       else {
@@ -56,6 +72,9 @@ var questions =[
         $("#correctanswers").text ("correctanswers :" + correctAnswers);
         $("#wronganswers").text ("wronganswers :" + wrongAnswers);
         $("#validation").empty();
+        
+        var input = $("<input type='button' value='StartOver' />");
+        input.appendTo($("#gameplay"));
       }
        };
       
@@ -155,7 +174,16 @@ var questions =[
     
  }
 
+ $("StartOver").on("click", function(){
+
+   gamePlay();
+ }
+
+ gamePlay();
  submit();
+ 
+
+
  
  
 
