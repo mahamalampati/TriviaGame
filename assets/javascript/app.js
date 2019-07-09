@@ -25,6 +25,10 @@ var questions =[
    
 
    var questionIndex=0;
+   var startover  = $('<input type="button" value="startOver" />');
+   
+    
+   
    
    function gamePlay()
    {
@@ -44,10 +48,12 @@ var questions =[
        });
    
       }
-   
+
+          
    
    function renderQuestions()
    {
+    $("#startover").empty();
     $("#question").empty();
     $("#answer1").empty();
     $("#answer2").empty();
@@ -72,13 +78,15 @@ var questions =[
         $("#correctanswers").text ("correctanswers :" + correctAnswers);
         $("#wronganswers").text ("wronganswers :" + wrongAnswers);
         $("#validation").empty();
+        startover .appendTo($("#startover"));
+      
         
-        var input = $("<input type='button' value='StartOver' />");
-        input.appendTo($("#gameplay"));
+        
       }
-       };
+       }
       
        renderQuestions();
+     
        
        function first(){
        $("#answer1").on("click", function() {
@@ -174,13 +182,29 @@ var questions =[
     
  }
 
- $("StartOver").on("click", function(){
+ 
+ $("#startover").on("click",function()
+ {
+  correctAnswers = 0;
+  wrongAnswers =0;
+  $("#question").empty();
+  $("#correctanswers").empty();
+  $("#wronganswers").empty();
+  
+questionIndex = 0;
+renderQuestions();
+  
+ });
 
-   gamePlay();
- }
+
+ 
+ 
+
 
  gamePlay();
  submit();
+ 
+ 
  
 
 
