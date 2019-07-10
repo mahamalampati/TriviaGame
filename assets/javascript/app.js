@@ -1,4 +1,4 @@
-var time = 30;
+var time = 120;
 var questions = [
   {
     q: "What do doctors look at through an ophthalmoscope? ",
@@ -33,7 +33,7 @@ var timeremaining;
 var questionIndex = 0;
 var startover = $('<input type="button" value="startOver" />');
 
-function gamePlay() {
+function startGame() {
   $("#question").empty();
   $("#answer1").empty();
   $("#answer2").empty();
@@ -44,7 +44,7 @@ function gamePlay() {
     $("button").remove(".startBtn");
     intervalId = setInterval(timeCount, 1000);
     renderQuestions();
-    submit();
+    gamePlay();
   });
 }
 
@@ -64,7 +64,7 @@ function renderQuestions() {
     $("#answer4").append("<p>" + questions[questionIndex].d + "</p>");
   } else {
     // If there aren't, render the end game screen.
-   gameEnd();
+    gameEnd();
   }
 }
 
@@ -77,7 +77,7 @@ function first() {
       $("#validation").text("incorrect");
       wrongAnswers++;
     }
-    
+
     questionIndex++;
     renderQuestions();
   });
@@ -85,70 +85,70 @@ function first() {
 
 function second() {
   $("#answer2").on("click", function () {
-    
+
     if (questionIndex === 1 || questionIndex === 4) {
       $("#validation").text("correct");
       correctAnswers++;
-      
+
     }
-    
+
     else {
-      
+
       $("#validation").text("incorrect");
       wrongAnswers++;
-      
+
     }
     questionIndex++;
     renderQuestions();
-    
+
   });
 }
 
 function third() {
   $("#answer3").on("click", function () {
-    
+
     if (questionIndex === 3) {
       $("#validation").text("correct");
       correctAnswers++;
-      
-      
+
+
     }
-    
+
     else {
-      
+
       $("#validation").text("incorrect");
       wrongAnswers++;
-      
+
     }
     questionIndex++;
     renderQuestions();
-    
+
   });
 }
 
 function four() {
   $("#answer4").on("click", function () {
-    
+
     if (questionIndex === 2) {
       $("#validation").text("correct");
       correctAnswers++;
-      
-      
+
+
     }
-    
+
     else {
-      
+
       $("#validation").text("incorrect");
       wrongAnswers++;
-      
+
     }
     questionIndex++;
     renderQuestions();
-    
+
   });
 }
 
-function submit() {
+function gamePlay() {
   first();
   second();
   third();
@@ -161,43 +161,46 @@ $("#startover").on("click", function () {
   $("#question").empty();
   $("#correctanswers").empty();
   $("#wronganswers").empty();
-  
+
   questionIndex = 0;
   renderQuestions();
- intervalId = setInterval(timeCount,1000);
+
+  intervalId = setInterval(timeCount, 1000);
   //start timer again
 });
-function gameEnd(){
-$("#question").text("Game Over!");
-$("#answer1").empty();
-$("#answer2").empty();
-$("#answer3").empty();
-$("#answer4").empty();
-$("#correctanswers").text("correctanswers :" + correctAnswers);
-$("#wronganswers").text("wronganswers :" + wrongAnswers);
-$("#validation").empty();
+function gameEnd() {
+  $("#question").text("Game Over!");
+  $("#answer1").empty();
+  $("#answer2").empty();
+  $("#answer3").empty();
+  $("#answer4").empty();
+  $("#correctanswers").text("correctanswers :" + correctAnswers);
+  $("#wronganswers").text("wronganswers :" + wrongAnswers);
+  $("#validation").empty();
 
-startover.appendTo($("#startover"));
+  startover.appendTo($("#startover"));
+  stop();
+
 }
 function timeCount() {
   time--;
   // check if the time === 0 is up and call the stop and reset
-  $("#time").text(time);
+  $("#time").text("Remainingtime : " + time);
 
-  if(time === 0){
+  if (time === 0) {
     stop();
     gameEnd();
   }
 }
 
-function stop () {
+function stop() {
   clearInterval(intervalId);
   intervalId = null;
-  time =30;
+  time = 120;
   // reset timer
 }
+startGame();
 
-gamePlay();
 
 
 
